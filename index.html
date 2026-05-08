@@ -1,0 +1,3058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a3d4d">
+<title>Hawaii Learner's Permit Practice Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean-deep: #0a3d4d;
+    --ocean: #0e5468;
+    --ocean-mid: #1a7a93;
+    --lagoon: #4ec3d4;
+    --sand: #f5ecd9;
+    --sand-warm: #ede0c4;
+    --paper: #fbf7ee;
+    --hibiscus: #e63946;
+    --hibiscus-dark: #b8232f;
+    --plumeria: #f7c873;
+    --palm: #2d6a4f;
+    --palm-light: #52b788;
+    --ink: #14252b;
+    --ink-soft: #4a5b62;
+    --line: rgba(20, 37, 43, 0.12);
+    --line-soft: rgba(20, 37, 43, 0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at top right, rgba(78, 195, 212, 0.12), transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(247, 200, 115, 0.1), transparent 50%);
+    background-attachment: fixed;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* ========== TYPOGRAPHY ========== */
+  .display { font-family: 'Fraunces', Georgia, serif; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+  .label { font-family: 'Inter Tight', sans-serif; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px; }
+
+  /* ========== APP CONTAINER ========== */
+  .app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px;
+    padding-top: calc(env(safe-area-inset-top) + 16px);
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* ========== SCREENS ========== */
+  .screen { display: none; animation: screenIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .screen.active { display: block; }
+  @keyframes screenIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== HOME SCREEN ========== */
+  .hero {
+    text-align: center;
+    padding: 32px 0 24px;
+    position: relative;
+  }
+  .hero-emblem {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--ocean-deep);
+    color: var(--sand);
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero-emblem .label { color: var(--plumeria); font-size: 10px; }
+  .hero-emblem .dot { width: 6px; height: 6px; background: var(--plumeria); border-radius: 50%; }
+  .hero h1 {
+    font-size: clamp(38px, 9vw, 56px);
+    color: var(--ocean-deep);
+    margin-bottom: 12px;
+  }
+  .hero h1 em { font-style: italic; color: var(--hibiscus); font-weight: 400; }
+  .hero p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 440px;
+    margin: 0 auto 28px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 0 rgba(20, 37, 43, 0.04);
+  }
+  .stat { text-align: center; padding: 4px; }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; color: var(--ocean-deep); line-height: 1; }
+  .stat-label { font-size: 10px; color: var(--ink-soft); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+  /* ========== MODE PICKER ========== */
+  .mode-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .mode-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 20px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 1px 0 rgba(20, 37, 43, 0.04);
+  }
+  .mode-card:active { transform: scale(0.98); }
+  .mode-card:hover { border-color: var(--ocean-mid); box-shadow: 0 4px 16px rgba(14, 84, 104, 0.1); }
+  .mode-card.featured { background: var(--ocean-deep); border-color: var(--ocean-deep); color: white; }
+  .mode-card.featured .mode-icon { background: var(--plumeria); color: var(--ocean-deep); }
+  .mode-card.featured .mode-meta { color: rgba(255,255,255,0.7); }
+  .mode-card.featured h3 { color: white; }
+  .mode-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--sand-warm);
+    color: var(--ocean-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .mode-body { flex: 1; min-width: 0; }
+  .mode-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--ocean-deep);
+  }
+  .mode-meta { font-size: 13px; color: var(--ink-soft); }
+  .mode-arrow { color: currentColor; opacity: 0.4; flex-shrink: 0; }
+
+  /* ========== TIPS ========== */
+  .tips {
+    background: var(--sand);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(247, 200, 115, 0.4);
+  }
+  .tips h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ocean-deep);
+    margin-bottom: 10px;
+  }
+  .tips ul { list-style: none; }
+  .tips li {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    padding: 5px 0 5px 22px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .tips li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    background: var(--hibiscus);
+    border-radius: 50%;
+  }
+
+  /* ========== EXAM SCREEN ========== */
+  .exam-header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0);
+    background: rgba(251, 247, 238, 0.92);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    z-index: 50;
+    margin: 0 -16px 16px;
+    padding: 12px 16px 14px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .exam-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .quit-btn {
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 6px 8px;
+    margin-left: -8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .quit-btn:hover { color: var(--ink); }
+  .progress-text {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .progress-text strong { color: var(--ocean-deep); font-weight: 700; }
+  .progress-bar {
+    height: 4px;
+    background: var(--line-soft);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ocean-mid), var(--lagoon));
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+
+  /* ========== QUESTION CARD ========== */
+  .question-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px 22px;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(20, 37, 43, 0.04);
+    margin-bottom: 20px;
+  }
+  .q-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .q-num {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--hibiscus);
+    letter-spacing: 0.04em;
+  }
+  .q-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--sand-warm);
+    color: var(--ocean-deep);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .q-text {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 22px;
+    letter-spacing: -0.01em;
+  }
+  .q-visual {
+    background: var(--sand);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+  }
+  .q-visual svg { max-width: 100%; height: auto; }
+
+  /* ========== OPTIONS ========== */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px 14px 14px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .option:active { transform: scale(0.99); }
+  .option:hover:not(:disabled) { border-color: var(--ocean-mid); background: rgba(78, 195, 212, 0.04); }
+  .option:disabled { cursor: default; }
+  .option-letter {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--sand);
+    color: var(--ocean-deep);
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+  .option-text { flex: 1; padding-top: 4px; }
+
+  .option.selected { border-color: var(--ocean-mid); background: rgba(78, 195, 212, 0.06); }
+  .option.selected .option-letter { background: var(--ocean-mid); color: white; }
+
+  .option.correct {
+    border-color: var(--palm-light);
+    background: rgba(82, 183, 136, 0.08);
+  }
+  .option.correct .option-letter {
+    background: var(--palm);
+    color: white;
+  }
+  .option.incorrect {
+    border-color: var(--hibiscus);
+    background: rgba(230, 57, 70, 0.06);
+  }
+  .option.incorrect .option-letter {
+    background: var(--hibiscus);
+    color: white;
+  }
+
+  /* ========== EXPLANATION ========== */
+  .explanation {
+    background: var(--ocean-deep);
+    color: var(--paper);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-top: 16px;
+    animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .explanation-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .explanation-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .explanation-badge.right { background: var(--palm-light); color: var(--ocean-deep); }
+  .explanation-badge.wrong { background: var(--plumeria); color: var(--ocean-deep); }
+  .explanation-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(251, 247, 238, 0.92);
+  }
+  .explanation-text strong { color: var(--plumeria); font-weight: 600; }
+
+  /* ========== EXAM FOOTER / NAVIGATION ========== */
+  .exam-nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .btn {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.15s ease, background 0.15s ease;
+    flex: 1;
+    text-align: center;
+  }
+  .btn:active:not(:disabled) { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary { background: var(--ocean-deep); color: white; }
+  .btn-primary:hover:not(:disabled) { background: var(--ocean); }
+  .btn-secondary { background: white; color: var(--ocean-deep); border: 1.5px solid var(--line); }
+  .btn-secondary:hover:not(:disabled) { border-color: var(--ocean-mid); }
+  .btn-accent { background: var(--hibiscus); color: white; }
+  .btn-accent:hover:not(:disabled) { background: var(--hibiscus-dark); }
+
+  /* ========== RESULTS SCREEN ========== */
+  .results-card {
+    background: white;
+    border-radius: 18px;
+    padding: 32px 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    position: relative;
+  }
+  .results-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top, rgba(78, 195, 212, 0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .score-ring {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring-track { stroke: var(--line-soft); }
+  .score-ring-fill { transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+  .score-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .score-num {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--ocean-deep);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .score-pct { font-size: 14px; color: var(--ink-soft); margin-top: 4px; font-weight: 600; }
+  .results-verdict {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .results-verdict.pass { color: var(--palm); }
+  .results-verdict.fail { color: var(--hibiscus); }
+  .results-detail { color: var(--ink-soft); font-size: 14px; position: relative; z-index: 1; }
+
+  .review-list {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    margin-bottom: 16px;
+  }
+  .review-list h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--ocean-deep);
+    margin-bottom: 14px;
+  }
+  .review-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .review-item:last-child { border-bottom: none; }
+  .review-status {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+  }
+  .review-status.right { background: var(--palm); }
+  .review-status.wrong { background: var(--hibiscus); }
+  .review-q {
+    flex: 1;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .review-q-num { font-weight: 700; color: var(--ocean-deep); }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 11.5px;
+    padding: 24px 0;
+    line-height: 1.6;
+  }
+  footer a { color: var(--ocean-mid); text-decoration: none; }
+
+  /* ========== STUDY MODE BANNER ========== */
+  .mode-banner {
+    background: rgba(247, 200, 115, 0.18);
+    border: 1px solid rgba(247, 200, 115, 0.4);
+    color: var(--ocean-deep);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 380px) {
+    .app { padding: 0 12px; padding-top: calc(env(safe-area-inset-top) + 12px); }
+    .question-card { padding: 20px 18px; }
+    .q-text { font-size: 19px; }
+    .option { font-size: 14px; padding: 12px; }
+    .hero h1 { font-size: 36px; }
+  }
+
+  @media (min-width: 720px) {
+    .app { padding: 0 32px; padding-top: 32px; }
+  }
+
+  /* ========== ACCESSIBILITY ========== */
+  .option:focus-visible, .btn:focus-visible, .mode-card:focus-visible, .quit-btn:focus-visible {
+    outline: 2px solid var(--ocean-mid);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ========== HOME SCREEN ========== -->
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="hero-emblem">
+        <span class="dot"></span>
+        <span class="label">State of Hawaiʻi · Official Material</span>
+      </div>
+      <h1 class="display">Permit <em>Practice</em><br>Exam</h1>
+      <p>Aloha. Pass your Hawaiʻi learner's permit on the first try. 100+ questions pulled from the official 2023 Driver's Manual.</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">Questions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">80%</div>
+          <div class="stat-label">To Pass</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">30</div>
+          <div class="stat-label">Per Exam</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mode-list">
+      <button class="mode-card featured" onclick="startMode('exam')">
+        <div class="mode-icon">E</div>
+        <div class="mode-body">
+          <h3>Full Practice Exam</h3>
+          <div class="mode-meta">30 random questions · graded at the end · timed-feel format</div>
+        </div>
+        <svg class="mode-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <button class="mode-card" onclick="startMode('study')">
+        <div class="mode-icon">S</div>
+        <div class="mode-body">
+          <h3>Study Mode</h3>
+          <div class="mode-meta">Instant feedback after each answer · learn as you go</div>
+        </div>
+        <svg class="mode-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <button class="mode-card" onclick="startMode('signs')">
+        <div class="mode-icon">▲</div>
+        <div class="mode-body">
+          <h3>Signs &amp; Signals Drill</h3>
+          <div class="mode-meta">Focus on the visual sign questions · roughly 20 questions</div>
+        </div>
+        <svg class="mode-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <button class="mode-card" onclick="startMode('all')">
+        <div class="mode-icon">∞</div>
+        <div class="mode-body">
+          <h3>All Questions</h3>
+          <div class="mode-meta">Cycle through every question in the bank · best for review</div>
+        </div>
+        <svg class="mode-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="tips">
+      <h4>Before you take the real exam</h4>
+      <ul>
+        <li>The Hawaiʻi knowledge test is 30 questions; you must score 80% (24 correct) to pass.</li>
+        <li>You must be at least 15½ years old to apply for an instruction permit.</li>
+        <li>Bring proof of identity, legal presence, social security number, and two proofs of Hawaiʻi residence.</li>
+        <li>If you're under 18, you'll need a parent or guardian's consent and you must hold the permit 180 days before applying for a provisional license.</li>
+      </ul>
+    </div>
+
+    <footer>
+      Practice exam built from the 2023 Hawaiʻi Driver's Manual and MVSO official practice questions.<br>
+      This is a study aid, not the official test.
+    </footer>
+  </section>
+
+  <!-- ========== EXAM SCREEN ========== -->
+  <section id="exam" class="screen">
+    <div class="exam-header">
+      <div class="exam-top">
+        <button class="quit-btn" onclick="confirmQuit()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Quit
+        </button>
+        <div class="progress-text"><strong id="qCurrent">1</strong> of <span id="qTotal">30</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div id="modeBanner" class="mode-banner" style="display:none;"></div>
+
+    <div class="question-card" id="questionCard">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="exam-nav" id="examNav">
+      <!-- populated by JS -->
+    </div>
+  </section>
+
+  <!-- ========== RESULTS SCREEN ========== -->
+  <section id="results" class="screen">
+    <div class="results-card">
+      <div class="score-ring">
+        <svg width="180" height="180">
+          <circle class="score-ring-track" cx="90" cy="90" r="80" fill="none" stroke-width="10"/>
+          <circle id="scoreRingFill" class="score-ring-fill" cx="90" cy="90" r="80" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="502.65" stroke-dashoffset="502.65"/>
+        </svg>
+        <div class="score-text">
+          <div class="score-num" id="scoreNum">0/0</div>
+          <div class="score-pct" id="scorePct">0%</div>
+        </div>
+      </div>
+      <div class="results-verdict" id="verdict">—</div>
+      <div class="results-detail" id="verdictDetail">—</div>
+    </div>
+
+    <div class="review-list" id="reviewList">
+      <h3>Question Review</h3>
+      <div id="reviewItems"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" onclick="goHome()">Take Another Exam</button>
+      <button class="btn btn-secondary" onclick="reviewMistakes()" id="reviewBtn">Review Mistakes</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ============================================================================
+// QUESTION BANK — sourced from 2023 Hawaii Driver's Manual + MVSO Practice Test
+// ============================================================================
+const QUESTIONS = [
+  // ===== LICENSING & ADMINISTRATION =====
+  {
+    id: 1,
+    cat: "Licensing",
+    q: "When you take a road test for a driver's license:",
+    options: [
+      "You must provide the vehicle.",
+      "The vehicle must be in safe operating condition free of safety defects.",
+      "You must be accompanied to the testing station by a licensed driver.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All three are required. You must bring your own vehicle, it must be safe and have current registration, inspection, and insurance, and you must be accompanied by a licensed driver."
+  },
+  {
+    id: 2,
+    cat: "Licensing",
+    q: "When you change your address you must notify the County Examiner of drivers:",
+    options: [
+      "In writing, within 30 days.",
+      "In writing, within 10 days.",
+      "In person, within 10 days.",
+      "By telephone, within 30 days."
+    ],
+    answer: 0,
+    explain: "Notify the County Examiner of drivers in writing within 30 days of an address change."
+  },
+  {
+    id: 3,
+    cat: "Licensing",
+    q: "When you change your name you must notify the County Examiner of drivers in person with proof of the change within:",
+    options: ["60 days.", "20 days.", "10 days.", "30 days."],
+    answer: 3,
+    explain: "Name changes must be reported in person with proof within 30 days."
+  },
+  {
+    id: 4,
+    cat: "Licensing",
+    q: "When driving a vehicle upon any public street or highway you must:",
+    options: [
+      "Show your driver's license upon demand.",
+      "Carry your license with you.",
+      "Have a valid driver's license.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All of the above. You must hold a valid license, carry it with you, and produce it for any officer who asks."
+  },
+  {
+    id: 5,
+    cat: "Licensing",
+    q: "When your driver's license expires you may:",
+    options: [
+      "Drive during the grace period of 90 days.",
+      "Drive as long as you are accompanied by a licensed driver.",
+      "Not drive — but you may renew within a year of expiration following normal renewal steps.",
+      "Drive to and from work only."
+    ],
+    answer: 2,
+    explain: "There is no grace period. You cannot drive on an expired license, but you may renew within one year of expiration through normal steps."
+  },
+
+  // ===== VEHICLE EQUIPMENT =====
+  {
+    id: 6,
+    cat: "Equipment",
+    q: "All head lamps on your vehicle must work properly and be correctly adjusted:",
+    options: [
+      "When driving in city traffic.",
+      "At all times.",
+      "When driving on freeways.",
+      "When approaching other vehicles."
+    ],
+    answer: 1,
+    explain: "Headlamps must be operational and properly adjusted at all times — not just at night or in certain conditions."
+  },
+  {
+    id: 7,
+    cat: "Equipment",
+    q: "Which of the following may you have installed on your private vehicle?",
+    options: [
+      "A red light showing the front, or a blue light visible outside of the vehicle.",
+      "A bell, exhaust whistle or siren.",
+      "A muffler cut-out or by-pass if used only on country roads.",
+      "None of the above."
+    ],
+    answer: 3,
+    explain: "None of these are permitted on a private vehicle. Red/blue lights, sirens, and muffler cut-outs are reserved for emergency or specially permitted vehicles."
+  },
+  {
+    id: 8,
+    cat: "Equipment",
+    q: "A copy of the vehicle inspection certificate:",
+    options: [
+      "Should be kept in the vehicle.",
+      "Filed with your State income tax return.",
+      "Be kept in a safe place in the home.",
+      "Will be sent to you by the County Department of Finance."
+    ],
+    answer: 0,
+    explain: "Always keep a copy of the inspection certificate in the vehicle along with your registration and insurance card."
+  },
+  {
+    id: 9,
+    cat: "Equipment",
+    q: "The mechanical condition of the vehicle is the responsibility of:",
+    options: [
+      "The legal owner of the vehicle.",
+      "The garage mechanic.",
+      "The vehicle driver and registered owner of the vehicle.",
+      "The insurance company."
+    ],
+    answer: 2,
+    explain: "Both the driver and registered owner are responsible for ensuring the vehicle is in safe mechanical condition."
+  },
+  {
+    id: 10,
+    cat: "Equipment",
+    q: "A leaky exhaust system in your vehicle is dangerous because it can cause:",
+    options: [
+      "A loss of hearing.",
+      "Pollution.",
+      "Carbon monoxide poisoning.",
+      "Poor engine performance."
+    ],
+    answer: 2,
+    explain: "Carbon monoxide is colorless and odorless. A leaky exhaust can leak it into the cabin and cause poisoning, drowsiness, or death."
+  },
+  {
+    id: 11,
+    cat: "Registration",
+    q: "When you change your address from that on the registration certificate, you:",
+    options: [
+      "Must notify the County Department of Finance when renewing the license.",
+      "Must notify the County Department of Finance within 30 days after the change.",
+      "Must make the change only when selling or trading the car.",
+      "Do not have to do anything."
+    ],
+    answer: 1,
+    explain: "Notify the County Department of Finance within 30 days of an address change."
+  },
+
+  // ===== THE DRIVER =====
+  {
+    id: 12,
+    cat: "The Driver",
+    q: "The most important thing in any driving situation is:",
+    options: [
+      "The vehicle.",
+      "The environment (the highway and traffic).",
+      "The driver (you).",
+      "The time of day."
+    ],
+    answer: 2,
+    explain: "You — the driver — are the most important factor. Your judgment, attention, and skill control everything else."
+  },
+  {
+    id: 13,
+    cat: "The Driver",
+    q: "Your boss chews you out before quitting time. You're angry. When you get to your car you should:",
+    options: [
+      "Play the radio loud so you won't think about it.",
+      "Drive fast on the Interstate to let off steam.",
+      "Take a few minutes to cool off before you drive home.",
+      "Stop at your favorite bar and have a few drinks before driving home."
+    ],
+    answer: 2,
+    explain: "Strong emotions impair driving as much as alcohol. Take a few minutes to calm down before getting behind the wheel."
+  },
+  {
+    id: 14,
+    cat: "The Driver",
+    q: "When other drivers challenge you to demonstrate your driving capabilities, you should:",
+    options: [
+      "Resist the desire to exhibit and compete.",
+      "Decline all challenges to prove you or your vehicle's capabilities.",
+      "Take on only those challenges which you know you can safely win.",
+      "Both 1 and 2 above."
+    ],
+    answer: 3,
+    explain: "Never accept driving challenges. Resist the urge to compete, and decline all such challenges."
+  },
+  {
+    id: 15,
+    cat: "The Driver",
+    q: "To ensure that your physical condition does not cause you to drive unsafely, you should:",
+    options: [
+      "Keep physically fit and have regular physical examinations.",
+      "Know the effect of any medicine on your driving ability.",
+      "Drive within your physical limitations.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All of these are part of being a fit driver — physical health, medication awareness, and respecting your limits."
+  },
+  {
+    id: 16,
+    cat: "The Driver",
+    q: "Which of the following influences your driving actions most?",
+    options: [
+      "Your height.",
+      "Your age.",
+      "Your attitude towards driving.",
+      "Your reaction time."
+    ],
+    answer: 2,
+    explain: "Attitude is the single biggest influence. A bad attitude leads to aggressive, careless, or impatient driving."
+  },
+
+  // ===== TRAFFIC LAWS =====
+  {
+    id: 17,
+    cat: "Traffic Laws",
+    q: "A police officer directing traffic directs you to go through a red light. What should you do?",
+    options: ["Stop, and then go.", "Wait for the green light.", "Go on as directed.", "Make a right turn."],
+    answer: 2,
+    explain: "Lawful orders from a police officer override traffic signals. Always obey the officer's direction."
+  },
+  {
+    id: 18,
+    cat: "Traffic Laws",
+    q: "Traffic signs and pavement markings must be:",
+    options: [
+      "Always obeyed.",
+      "Used as a guide only.",
+      "Followed only when there is other traffic.",
+      "Followed only when a police officer is present."
+    ],
+    answer: 0,
+    explain: "Traffic signs and pavement markings are always to be obeyed — they're the law, not suggestions."
+  },
+  {
+    id: 19,
+    cat: "Traffic Laws",
+    q: "You're driving on a narrow road and meet an oncoming vehicle. You must:",
+    options: [
+      "Pull completely off the road and stop.",
+      "Allow the oncoming vehicle at least one-half of the main travelled portion of the road.",
+      "Make the other vehicle pull over as you were there first.",
+      "Turn on your headlights to make sure the other vehicle sees you."
+    ],
+    answer: 1,
+    explain: "On narrow roads, you must give oncoming vehicles at least half of the main travelled portion."
+  },
+  {
+    id: 20,
+    cat: "Traffic Laws",
+    q: "When turning or changing lanes you must:",
+    options: [
+      "Always signal your intentions even when there is no traffic visible.",
+      "Signal only if there is traffic.",
+      "Signal only when driving at night.",
+      "Signal only when driving in traffic at night."
+    ],
+    answer: 0,
+    explain: "Hawaii law requires you to signal every turn or lane change, regardless of whether traffic is present."
+  },
+  {
+    id: 21,
+    cat: "Traffic Laws",
+    q: "Traffic regulations require that you display a turn signal for at least ___ feet before making every turn or lane change.",
+    options: ["50 feet.", "75 feet.", "100 feet.", "25 feet."],
+    answer: 2,
+    explain: "Hawaii law requires signaling at least 100 feet (about five car lengths) before turning, changing lanes, or stopping."
+  },
+  {
+    id: 22,
+    cat: "Traffic Laws",
+    q: "You're approaching a railroad crossing and the crossing signals are flashing. You should:",
+    options: [
+      "Stop and look for a train.",
+      "Slow down and look for a train.",
+      "Look for a train, then speed up.",
+      "Do what the approaching vehicle does."
+    ],
+    answer: 0,
+    explain: "Flashing signals at a railroad crossing mean STOP. Stop at least 15 feet from the nearest rail, then proceed only when safe."
+  },
+  {
+    id: 23,
+    cat: "Traffic Laws",
+    q: "You must not drive at a speed greater than:",
+    options: [
+      "The posted maximum speed limit.",
+      "A speed that is greater than is reasonable and prudent.",
+      "A speed that is safe for existing conditions.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All apply. Hawaii's basic speed law says you must drive at a speed that is reasonable and prudent for conditions, never above the posted limit."
+  },
+  {
+    id: 24,
+    cat: "Parking",
+    q: "When you leave your vehicle unattended, you must:",
+    options: [
+      "Stop the engine.",
+      "Lock the ignition and remove the ignition key.",
+      "Set the parking brake.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "Always stop the engine, remove the key, and set the parking brake. On a grade, also turn the wheels toward the curb."
+  },
+  {
+    id: 25,
+    cat: "Emergency Vehicles",
+    q: "You're driving and hear a siren behind you. You should:",
+    options: [
+      "Stop.",
+      "Pull over to the right and stop.",
+      "Speed up to get out of the way.",
+      "Slow down."
+    ],
+    answer: 1,
+    explain: "Pull over to the right and stop until the emergency vehicle has passed. Never block an intersection."
+  },
+  {
+    id: 26,
+    cat: "Emergency Vehicles",
+    q: "An emergency vehicle with siren and flashing lights is directly behind you in heavy traffic and you cannot get out of the way. You should:",
+    options: [
+      "Stop.",
+      "Blow your horn.",
+      "Force your way into traffic in the adjoining lane.",
+      "Keep moving slowly until you can get out of the way."
+    ],
+    answer: 3,
+    explain: "Keep moving slowly so the emergency vehicle can find a path around you. Don't force your way into other lanes."
+  },
+  {
+    id: 27,
+    cat: "Emergency Vehicles",
+    q: "An emergency vehicle is approaching from the opposite direction on a two-lane street. You should:",
+    options: [
+      "Stop as quickly as you can.",
+      "Slow down, move as far to the right as possible and stop.",
+      "Disregard the emergency vehicle as it is going the other way.",
+      "None of the above."
+    ],
+    answer: 1,
+    explain: "Even when the emergency vehicle is heading toward you on a two-lane road, slow down, pull right, and stop."
+  },
+  {
+    id: 28,
+    cat: "Emergency Vehicles",
+    q: "On a two-lane street your vehicle is being followed by a fire engine that is NOT using emergency signals. You should:",
+    options: [
+      "Continue to drive in a normal manner.",
+      "Stop as quickly as you can.",
+      "Speed up to get out of the way.",
+      "Slow down, move as far to the right as possible and stop."
+    ],
+    answer: 0,
+    explain: "If the emergency vehicle isn't using lights or siren, it's not on an emergency call. Drive normally."
+  },
+  {
+    id: 29,
+    cat: "Emergency Vehicles",
+    q: "On a divided multi-lane highway you see or hear an approaching emergency vehicle. You should:",
+    options: [
+      "Disregard the signal if there are other lanes available.",
+      "Stop as quickly as you can.",
+      "Slow down, move your vehicle to provide a clear path for the emergency vehicle and stop.",
+      "Increase your speed to provide a clear path."
+    ],
+    answer: 2,
+    explain: "Slow down, move to provide a clear path, and stop — even on a multi-lane road."
+  },
+
+  // ===== PASSING =====
+  {
+    id: 30,
+    cat: "Passing",
+    q: "You may pass another vehicle:",
+    options: [
+      "On a curve or hill because the chance is small that another vehicle is coming.",
+      "On the shoulder of the highway.",
+      "When there is a solid yellow line in your lane if it's clear ahead.",
+      "None of the above."
+    ],
+    answer: 3,
+    explain: "None are legal. Never pass on hills, curves, the shoulder, or where there's a solid yellow line in your lane."
+  },
+  {
+    id: 31,
+    cat: "Passing",
+    q: "You may pass a school bus from the front or rear on an undivided roadway:",
+    options: [
+      "Never.",
+      "When the red lamps on the school bus are flashing.",
+      "When the red lamps on the school bus are NOT flashing.",
+      "At any time, if you go slow."
+    ],
+    answer: 2,
+    explain: "If the red lamps aren't flashing, you may pass. When they ARE flashing, you must stop in both directions on an undivided road."
+  },
+  {
+    id: 32,
+    cat: "Passing",
+    q: "You see a yellow line in your lane and want to pass a slow truck. What should you do?",
+    options: [
+      "Pass the slow moving truck.",
+      "Pass if the way is clear.",
+      "Pass if the truck driver waves you by.",
+      "Stay in the lane behind the truck."
+    ],
+    answer: 3,
+    explain: "A yellow line in your lane means there isn't enough clear distance to pass safely. Stay behind the truck."
+  },
+  {
+    id: 33,
+    cat: "Passing",
+    q: "You're passing the car beside you. When should you return to your lane?",
+    options: [
+      "As soon as possible.",
+      "About one car length ahead of the car being passed.",
+      "When you can see the car in your rear-view mirror.",
+      "As soon as you have signaled."
+    ],
+    answer: 2,
+    explain: "Wait until you can see the car you passed in your rear-view mirror, then signal and pull back gradually."
+  },
+  {
+    id: 34,
+    cat: "Passing",
+    q: "You're driving on a one-way street with two or more lanes. You may pass another vehicle:",
+    options: [
+      "On the left only.",
+      "On the right only.",
+      "On either the right or the left.",
+      "You must always use the lane furthest to the left to pass."
+    ],
+    answer: 2,
+    explain: "On a one-way street with two or more lanes, you may pass on either side."
+  },
+
+  // ===== INTERSECTIONS & RIGHT OF WAY =====
+  {
+    id: 35,
+    cat: "Right-of-Way",
+    q: "An intersection has no traffic signs or signals. You arrive at the same time as another vehicle. You should:",
+    options: [
+      "Speed up and get through the intersection.",
+      "Slow down and yield to the vehicle on the right.",
+      "Drive into the intersection and make the other vehicle stop.",
+      "Honk your horn and drive through the intersection."
+    ],
+    answer: 1,
+    explain: "When two vehicles arrive at an uncontrolled intersection at the same time, the vehicle on the LEFT yields to the vehicle on the RIGHT."
+  },
+  {
+    id: 36,
+    cat: "Right-of-Way",
+    q: "You're approaching a green light and pedestrians are crossing against the red. You should:",
+    options: [
+      "Honk your horn.",
+      "Speed up and pass in front of the pedestrians.",
+      "Stop to let the pedestrians cross safely.",
+      "Drive close and frighten them so they'll think twice."
+    ],
+    answer: 2,
+    explain: "Pedestrians always have priority over your safety, even when they're crossing illegally. Stop and let them cross."
+  },
+  {
+    id: 37,
+    cat: "Right-of-Way",
+    q: "When you drive into the street from any driveway you:",
+    options: [
+      "Must drive slowly so others can get out of your way.",
+      "Must honk so vehicles and pedestrians can allow you room.",
+      "Must stop and proceed only when there are no pedestrians or vehicles approaching.",
+      "Can disregard pedestrians if there is no sidewalk."
+    ],
+    answer: 2,
+    explain: "Always stop before crossing the sidewalk and yield to all pedestrians and traffic before entering the road."
+  },
+  {
+    id: 38,
+    cat: "Right-of-Way",
+    q: "You and another vehicle approach an intersection with no signs or signals. Which has the right of way?",
+    options: [
+      "The vehicle on the left.",
+      "The vehicle on the right.",
+      "The vehicle with the greatest speed.",
+      "The vehicle that enters the intersection first."
+    ],
+    answer: 1,
+    explain: "The vehicle on the RIGHT has the right of way at an uncontrolled intersection."
+  },
+  {
+    id: 39,
+    cat: "Right-of-Way",
+    q: "When turning left at an intersection or driveway you:",
+    options: [
+      "Should leave room on the right for other vehicles to pass.",
+      "Must yield to vehicles approaching closely from the opposite direction.",
+      "Must not cross any solid yellow line.",
+      "Must not block vehicles approaching from the rear."
+    ],
+    answer: 1,
+    explain: "Always yield to oncoming traffic when turning left. Wait for a safe gap before turning."
+  },
+  {
+    id: 40,
+    cat: "Right-of-Way",
+    q: "You're stopped behind other vehicles waiting at a stop sign. When the intersection is clear:",
+    options: [
+      "You may proceed through without stopping again.",
+      "You must stop again at the stop sign or stop line.",
+      "You may go through slowly without stopping if there's no other traffic.",
+      "You may follow the vehicle ahead without stopping again."
+    ],
+    answer: 1,
+    explain: "Each driver must come to a complete stop at the stop line — even if the car in front of you already stopped."
+  },
+  {
+    id: 41,
+    cat: "Right-of-Way",
+    q: "You're approaching a 4-way stop sign:",
+    options: [
+      "You must stop and yield to all traffic within the intersection.",
+      "You may drive through if there is no other crossing traffic.",
+      "You do not have to stop if turning right.",
+      "Both 2 and 3 are correct."
+    ],
+    answer: 0,
+    explain: "Stop completely at every 4-way stop and yield to traffic already in the intersection. First-arrived goes first; ties yield to the right."
+  },
+
+  // ===== SIGNS (TEXT) =====
+  {
+    id: 42,
+    cat: "Signs",
+    q: "Highway signs and markings that REQUIRE you to obey an instruction are known as:",
+    options: ["Regulatory signs.", "Warning signs.", "Information signs.", "Guide signs."],
+    answer: 0,
+    explain: "Regulatory signs (stop, yield, speed limit, do not enter) require an action. Disobeying them is a violation of law."
+  },
+  {
+    id: 43,
+    cat: "Signs",
+    q: "Highway signs and markings that contain information about HAZARDOUS conditions are known as:",
+    options: ["Regulatory signs.", "Warning signs.", "Information signs.", "Guide signs."],
+    answer: 1,
+    explain: "Warning signs are usually diamond-shaped, yellow, with a black border. They warn of hazards ahead."
+  },
+  {
+    id: 44,
+    cat: "Signs",
+    q: "You see a 'reduced speed ahead' sign. As a driver you should know:",
+    options: [
+      "Maintain your current speed until you reach the slower zone.",
+      "Begin to reduce your vehicle's speed.",
+      "It's dangerous to slow down because traffic backs up.",
+      "The sign is only for poke-along drivers."
+    ],
+    answer: 1,
+    explain: "Begin reducing your speed when you see the 'reduced speed ahead' sign. The new limit takes effect at the next speed limit sign."
+  },
+  {
+    id: 45,
+    cat: "Signs",
+    q: "While driving you see a 'reduced speed 35 MPH' sign. You should know:",
+    options: [
+      "The new 35 MPH zone begins at this sign.",
+      "The new 35 MPH zone begins at the NEXT speed limit sign.",
+      "You have plenty of time to slow down.",
+      "The sign is put there to harass good drivers."
+    ],
+    answer: 1,
+    explain: "The 'reduced speed' sign warns you. The new limit officially begins at the next speed limit sign."
+  },
+  {
+    id: 46,
+    cat: "Signs",
+    q: "A 'do not pass' sign means:",
+    options: [
+      "You must not pass another vehicle where these signs are posted.",
+      "You may pass a slow moving vehicle here if you can pass quickly.",
+      "It's all right to pass here if you 'know the road ahead.'",
+      "It's all right to pass here at night."
+    ],
+    answer: 0,
+    explain: "Do Not Pass signs are absolute. You may not pass another vehicle anywhere these signs are posted."
+  },
+
+  // ===== PAVEMENT MARKINGS =====
+  {
+    id: 47,
+    cat: "Markings",
+    q: "You're turning onto a two-lane road divided by a broken yellow line. You know immediately that:",
+    options: [
+      "You are on a two-way road.",
+      "You are on a one-way road.",
+      "The road is under repair.",
+      "You must stay to the left of the broken yellow lines."
+    ],
+    answer: 0,
+    explain: "Yellow lines separate traffic moving in opposite directions. A broken yellow line means it's a two-way road and passing is allowed when safe."
+  },
+  {
+    id: 48,
+    cat: "Markings",
+    q: "You're driving on a highway divided by two solid yellow lines. You know that:",
+    options: [
+      "You may cross these lines only to make a left turn into or from an alley, private road or driveway.",
+      "You may cross these lines to pass when there is no oncoming traffic.",
+      "You may never cross these lines.",
+      "You may cross these lines only to make a U-turn."
+    ],
+    answer: 0,
+    explain: "Double solid yellow means no passing in either direction. You may only cross to turn left into or from a driveway, alley, or private road."
+  },
+  {
+    id: 49,
+    cat: "Markings",
+    q: "On a four-lane divided highway:",
+    options: [
+      "White lane lines separate traffic moving in the same direction.",
+      "White lane lines separate traffic moving in opposite directions.",
+      "Yellow lane lines separate traffic moving in the same direction.",
+      "None of the above."
+    ],
+    answer: 0,
+    explain: "White lines separate traffic going the SAME direction. Yellow lines separate traffic going OPPOSITE directions."
+  },
+  {
+    id: 50,
+    cat: "Markings",
+    q: "On a four-lane divided highway, traffic lanes are separated by a SOLID white line. You should know that:",
+    options: [
+      "The solid white line may not be crossed.",
+      "The solid white line may be crossed at any time.",
+      "The solid white line may be crossed only in unusual circumstances and then only with great care.",
+      "It separates traffic moving in opposite directions."
+    ],
+    answer: 2,
+    explain: "A solid white line indicates lane changes are hazardous. Cross only in unusual circumstances and with great care."
+  },
+  {
+    id: 51,
+    cat: "Markings",
+    q: "On a four-lane highway a DOUBLE solid white line:",
+    options: [
+      "May not be crossed.",
+      "May be crossed only with great care.",
+      "Is used to separate traffic moving in opposite directions.",
+      "Is never used on highways."
+    ],
+    answer: 0,
+    explain: "Double solid white lines mean DO NOT CROSS. Crossing is prohibited."
+  },
+  {
+    id: 52,
+    cat: "Markings",
+    q: "Edgelines are solid ___ or ___ lines along the edges of the roadway used as a safety guide.",
+    options: ["Yellow; white.", "Red; white.", "Orange; white.", "Green; white."],
+    answer: 0,
+    explain: "Edgelines are white on the right edge of the road and yellow on the left edge of divided roadways."
+  },
+  {
+    id: 53,
+    cat: "Markings",
+    q: "Stop lines are solid white lines painted across traffic lanes at:",
+    options: [
+      "Curves; hills.",
+      "Churches; schools.",
+      "Intersections; pedestrian crosswalks.",
+      "Freeway on ramps; fire stations."
+    ],
+    answer: 2,
+    explain: "Stop lines mark the exact place to stop at intersections and crosswalks."
+  },
+  {
+    id: 54,
+    cat: "Markings",
+    q: "When pedestrians are in a crosswalk:",
+    options: [
+      "Motor vehicles have the right of way.",
+      "Pedestrians have the right of way over motor vehicles.",
+      "No one has the right of way in a crosswalk.",
+      "Pedestrians are responsible to keep out of the way of all traffic."
+    ],
+    answer: 1,
+    explain: "Pedestrians in crosswalks always have the right of way. You MUST stop for them."
+  },
+  {
+    id: 55,
+    cat: "Markings",
+    q: "A center lane formed by a combination of yellow solid and dashed lines is used:",
+    options: [
+      "For passing only.",
+      "Only for left turns by traffic travelling in either direction.",
+      "As a pedestrian safety zone.",
+      "For truck and bus traffic only."
+    ],
+    answer: 1,
+    explain: "A two-way left turn lane (yellow solid + dashed) is for left turns ONLY, in either direction. Never use it for passing or driving through."
+  },
+  {
+    id: 56,
+    cat: "Markings",
+    q: "Solid lines painted in traffic lanes that guide you around obstructions are called obstruction markings. As a driver:",
+    options: [
+      "You may pass to either side of WHITE obstruction markings.",
+      "You may pass to either side of YELLOW obstruction markings.",
+      "Both 1 and 2 above.",
+      "None of the above."
+    ],
+    answer: 0,
+    explain: "Pass on either side of WHITE obstruction markings. Pass only to the RIGHT of YELLOW obstruction markings."
+  },
+
+  // ===== TRAFFIC SIGNALS =====
+  {
+    id: 57,
+    cat: "Signals",
+    q: "A red traffic signal light means that you must:",
+    options: [
+      "Stop at the stop line.",
+      "When there is no stop line, stop before entering any crosswalk.",
+      "When there is no stop line or crosswalk, stop before entering the intersection.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "Stop at the stop line first. If none, stop before the crosswalk. If neither, stop before the intersection."
+  },
+  {
+    id: 58,
+    cat: "Signals",
+    q: "A stopped vehicle facing a circular RED light may, if not prohibited by a sign:",
+    options: [
+      "Turn right after yielding to other traffic and pedestrians.",
+      "It is illegal to turn right on red.",
+      "Turn right at any time.",
+      "Turn right only after blowing the horn."
+    ],
+    answer: 0,
+    explain: "Right turn on red is allowed in Hawaii after a complete stop and yielding to traffic and pedestrians, unless a sign prohibits it."
+  },
+  {
+    id: 59,
+    cat: "Signals",
+    q: "A stopped vehicle facing a circular RED light may turn LEFT if not prohibited by a sign:",
+    options: [
+      "When there is no other traffic or pedestrians.",
+      "Never.",
+      "Only right turns on red are permitted in Hawaii.",
+      "After yielding to pedestrians and traffic, when turning from a one-way street into another one-way street."
+    ],
+    answer: 3,
+    explain: "Left turn on red is permitted ONLY from a one-way street onto another one-way street, after stopping and yielding."
+  },
+  {
+    id: 60,
+    cat: "Signals",
+    q: "A steady circular yellow light on a traffic signal means:",
+    options: [
+      "You should speed up to beat the red light.",
+      "A red light is going to be shown immediately thereafter.",
+      "You should avoid entering the intersection if possible.",
+      "Both 2 and 3 above."
+    ],
+    answer: 3,
+    explain: "Yellow means red is coming. Don't enter the intersection if you can safely stop."
+  },
+  {
+    id: 61,
+    cat: "Signals",
+    q: "A circular green traffic light means:",
+    options: [
+      "You always have the right of way.",
+      "You may go straight ahead or turn, except where signs prohibit turns.",
+      "Traffic and pedestrians already in the intersection must get out of your way.",
+      "Both 2 and 3 above."
+    ],
+    answer: 1,
+    explain: "Green means you may proceed, but you MUST yield to pedestrians and vehicles already in the intersection."
+  },
+  {
+    id: 62,
+    cat: "Signals",
+    q: "A red ARROW means:",
+    options: [
+      "It is never used as a traffic signal.",
+      "The same as a circular red light for the indicated lane.",
+      "You may go in the direction indicated by the arrow.",
+      "Traffic the arrow points toward must stop."
+    ],
+    answer: 1,
+    explain: "A red arrow is just like a red light, but it only applies to the lane and direction indicated."
+  },
+  {
+    id: 63,
+    cat: "Signals",
+    q: "A green ARROW means:",
+    options: [
+      "Used only on one-way streets.",
+      "Same as a green light, but you must go ONLY in the direction the arrow indicates.",
+      "You may go only if accompanied by a green light.",
+      "Points the way to the airport."
+    ],
+    answer: 1,
+    explain: "A green arrow gives you a protected movement, but ONLY in the direction the arrow points."
+  },
+  {
+    id: 64,
+    cat: "Signals",
+    q: "A red flashing signal means the same as a:",
+    options: ["Red light.", "Stop sign.", "Yield sign.", "Caution sign."],
+    answer: 1,
+    explain: "A flashing red signal is treated exactly like a stop sign — full stop, then go when safe."
+  },
+  {
+    id: 65,
+    cat: "Signals",
+    q: "A yellow flashing signal means:",
+    options: [
+      "The roadway ends.",
+      "You must stop.",
+      "You may proceed only with caution.",
+      "You must stop for cross traffic."
+    ],
+    answer: 2,
+    explain: "Flashing yellow means proceed with caution — slow down and watch for cross traffic."
+  },
+  {
+    id: 66,
+    cat: "Signals",
+    q: "A lighted red 'X' over a traffic lane means:",
+    options: [
+      "You may use that lane.",
+      "You may not use that lane.",
+      "The lane is for traffic coming toward you.",
+      "Both 2 and 3 above."
+    ],
+    answer: 3,
+    explain: "Red X means do not use that lane — it's being used by traffic in the opposite direction."
+  },
+  {
+    id: 67,
+    cat: "Signals",
+    q: "A yellow 'X' over a traffic lane means:",
+    options: [
+      "You must move out of that lane because it's about to be used for oncoming traffic.",
+      "You may use that lane.",
+      "The lane is for left turns only.",
+      "You may use the lane but with caution."
+    ],
+    answer: 0,
+    explain: "Yellow X is a warning to move out of the lane. The lane is about to switch to oncoming traffic."
+  },
+  {
+    id: 68,
+    cat: "Signals",
+    q: "A steady 'DON'T WALK' or upraised palm signal means:",
+    options: [
+      "Pedestrians must not enter the roadway toward the signal.",
+      "Pedestrians already in the intersection may continue to the nearest sidewalk, traffic island or safety zone.",
+      "Pedestrians already in the intersection must run to the nearest sidewalk.",
+      "Both 1 and 2 above."
+    ],
+    answer: 0,
+    explain: "Steady DON'T WALK means pedestrians cannot start crossing. (A FLASHING DON'T WALK means those already crossing should continue.)"
+  },
+
+  // ===== ALCOHOL & DRUGS =====
+  {
+    id: 69,
+    cat: "Alcohol",
+    q: "Persons driving under the influence of intoxicating liquor are:",
+    options: [
+      "Every driver's problem whether they drink or not.",
+      "Only a problem to those who drink.",
+      "Not a problem in Hawaii.",
+      "A police enforcement problem only."
+    ],
+    answer: 0,
+    explain: "Drunk drivers cause about 40% of fatal crashes nationwide. They are every driver's problem — drinker or not."
+  },
+  {
+    id: 70,
+    cat: "Alcohol",
+    q: "A few drinks after work before driving home:",
+    options: [
+      "Is good because you miss the rush traffic.",
+      "Is good because they help to release the day's tension.",
+      "Should be avoided because they may make you a dangerous driver.",
+      "Never hurt anyone."
+    ],
+    answer: 2,
+    explain: "Even a small amount of alcohol impairs judgment, vision, and reaction time. Avoid drinking before driving."
+  },
+  {
+    id: 71,
+    cat: "Alcohol",
+    q: "Alcoholic beverages will affect you:",
+    options: [
+      "More rapidly just after eating.",
+      "More rapidly on an empty stomach.",
+      "The same way at all times.",
+      "Only if you have more than two drinks."
+    ],
+    answer: 1,
+    explain: "Alcohol absorbs faster on an empty stomach because there's no food to slow its passage into the bloodstream."
+  },
+  {
+    id: 72,
+    cat: "Alcohol",
+    q: "After alcohol has entered your blood you can lessen its effect by:",
+    options: [
+      "Taking a cold shower.",
+      "Drinking black coffee.",
+      "Both 1 and 2 above.",
+      "There is nothing you can do to lessen the effect."
+    ],
+    answer: 3,
+    explain: "Nothing speeds the elimination of alcohol from your body. Coffee, showers, and food may wake you up but they don't sober you up. Only time does."
+  },
+  {
+    id: 73,
+    cat: "Alcohol",
+    q: "A police officer charges you with DUI and tells you to take a test for blood alcohol. As the driver:",
+    options: [
+      "You don't have to take it if you can prove you weren't drinking.",
+      "You must take the test or risk losing your driver's license.",
+      "You don't have to take it if you haven't violated any traffic rule.",
+      "You don't have to do anything."
+    ],
+    answer: 1,
+    explain: "Hawaii's implied consent law: by driving, you've already consented to testing. Refusal results in administrative license revocation."
+  },
+  {
+    id: 74,
+    cat: "Alcohol",
+    q: "If you refuse to take the required blood alcohol test, you may lose your license for twelve months:",
+    options: [
+      "Only if you are convicted of DUI.",
+      "Only if you are convicted of a traffic violation.",
+      "Because you have refused to take the test.",
+      "You won't lose your license."
+    ],
+    answer: 2,
+    explain: "Refusing the test triggers automatic license revocation under Administrative License Revocation (ALR), independent of any DUI conviction."
+  },
+  {
+    id: 75,
+    cat: "Alcohol",
+    q: "You may drink alcoholic beverages in a vehicle on a public highway:",
+    options: [
+      "As long as you don't drive.",
+      "Only if you ride in the back seat.",
+      "Only if you ride in the back of a pick-up truck.",
+      "It is against the law to drink alcoholic beverages on a public highway."
+    ],
+    answer: 3,
+    explain: "Hawaii prohibits ANY consumption or possession of an open alcoholic beverage on a public highway or sidewalk — driver or passenger."
+  },
+  {
+    id: 76,
+    cat: "Drugs",
+    q: "Drugs may interfere with a person's ability to drive safely:",
+    options: [
+      "Only if the drugs are prescribed by a doctor.",
+      "Only when taken while drinking.",
+      "Only when driving at night.",
+      "And it's important to ask your doctor about any effects on your driving ability."
+    ],
+    answer: 3,
+    explain: "Both prescription and over-the-counter drugs can affect driving. Always ask your doctor or pharmacist."
+  },
+  {
+    id: 77,
+    cat: "Drugs",
+    q: "Combining alcohol and drugs can:",
+    options: [
+      "Have a less pronounced effect than either taken separately.",
+      "Have a MORE pronounced effect than either taken separately.",
+      "Help cure your illness.",
+      "Improve your driving ability."
+    ],
+    answer: 1,
+    explain: "Alcohol and drugs taken together can produce dangerous compounded effects far beyond either alone. Never mix."
+  },
+  {
+    id: 78,
+    cat: "Alcohol",
+    q: "The effect alcohol has on your reflexes and judgment:",
+    options: [
+      "Is less if you were only drinking beer.",
+      "Is less if you were only drinking wine.",
+      "Is greater if you were drinking whiskey or hard liquor.",
+      "Depends on the amount of alcohol in your blood."
+    ],
+    answer: 3,
+    explain: "It's the amount of alcohol in your blood that matters — not the type of beverage. A beer, glass of wine, and shot of liquor all contain similar alcohol amounts."
+  },
+
+  // ===== DRIVING HABITS / DEFENSIVE DRIVING =====
+  {
+    id: 79,
+    cat: "Habits",
+    q: "Turning your head and looking before changing lanes is:",
+    options: [
+      "A bad driving habit.",
+      "A good driving habit.",
+      "Unnecessary.",
+      "Not necessary if you use the rear-view mirror."
+    ],
+    answer: 1,
+    explain: "Always physically turn your head to check blind spots — mirrors alone don't show everything."
+  },
+  {
+    id: 80,
+    cat: "Habits",
+    q: "Failing to turn your head to check for traffic before changing lanes is:",
+    options: [
+      "All right if you first check the rear-view mirror.",
+      "A bad driving habit.",
+      "Many times the cause of a traffic crash.",
+      "Both 2 and 3 above."
+    ],
+    answer: 3,
+    explain: "It's both a bad habit AND a frequent cause of crashes. Always check your blind spot."
+  },
+  {
+    id: 81,
+    cat: "Habits",
+    q: "Signaling your intentions before turning, changing lanes, or driving away from a curb:",
+    options: [
+      "Is necessary only if other traffic is present.",
+      "Is a good driving habit and is required by law.",
+      "Is necessary only during the maneuver, not before.",
+      "Is not necessary if the maneuver is done slowly."
+    ],
+    answer: 1,
+    explain: "Always signal — it's both a good habit and Hawaii law, regardless of whether traffic is around."
+  },
+  {
+    id: 82,
+    cat: "Habits",
+    q: "An inattentive driver is one who:",
+    options: [
+      "Daydreams or gazes at objects off the roadway while driving.",
+      "Carries on an eye-contact conversation with a passenger while driving.",
+      "Restricts attention to only watching the vehicle ahead.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All of these reduce attention to the driving task. Inattention is a leading cause of crashes."
+  },
+  {
+    id: 83,
+    cat: "Habits",
+    q: "An arrogant driver is one who:",
+    options: [
+      "Is purposely in a hurry, competing with other traffic.",
+      "Shows little or no respect for traffic laws or right-of-way of others.",
+      "You should try to avoid when driving.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "Arrogant drivers compete, ignore laws, and disregard others. Stay away from them and never become one."
+  },
+  {
+    id: 84,
+    cat: "Defensive",
+    q: "Defensive driving is a technique where you:",
+    options: [
+      "Identify dangerous driving situations and take action to avoid a crash.",
+      "Defend against poor drivers by getting ahead of them.",
+      "Defend against crashes by following close to the vehicle ahead.",
+      "Defend against crashes by driving fast enough to stay ahead of traffic."
+    ],
+    answer: 0,
+    explain: "Defensive driving means anticipating hazards and acting before a crash develops. It's not about competing — it's about avoiding."
+  },
+  {
+    id: 85,
+    cat: "Defensive",
+    q: "To practice defensive driving you should:",
+    options: [
+      "Be aware of developing traffic situations around you.",
+      "Look well ahead and maintain a proper following distance.",
+      "Have an alternate plan of action ready (always leave yourself a way out).",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All of the above. Stay alert, look ahead, keep distance, and always have an escape route planned."
+  },
+  {
+    id: 86,
+    cat: "Defensive",
+    q: "Information you need to drive safely is gained primarily by:",
+    options: ["Seeing.", "Talking to yourself.", "Following other traffic.", "Turning the radio."],
+    answer: 0,
+    explain: "Almost all driving information comes from your eyes. Keep them moving and scanning."
+  },
+  {
+    id: 87,
+    cat: "Defensive",
+    q: "Increasing your vehicle's speed:",
+    options: [
+      "Increases your field of vision.",
+      "Decreases your field of vision.",
+      "Makes it easier to see cross traffic.",
+      "Has no effect on your field of vision."
+    ],
+    answer: 1,
+    explain: "The faster you go, the narrower your field of vision becomes. This is sometimes called 'tunnel vision.'"
+  },
+
+  // ===== SAFE DRIVING TECHNIQUES =====
+  {
+    id: 88,
+    cat: "Following",
+    q: "When driving in heavy traffic you should:",
+    options: [
+      "Drive close to the vehicle ahead to keep others from cutting in.",
+      "Drive close to the vehicle ahead being ready for a sudden stop.",
+      "Both 1 and 2 above.",
+      "Keep at least a two-second interval behind the vehicle ahead."
+    ],
+    answer: 3,
+    explain: "Always maintain at least a two-second following interval, even in heavy traffic. Tailgating is a leading crash cause."
+  },
+  {
+    id: 89,
+    cat: "Following",
+    q: "Following too closely is the cause of many traffic crashes. The proper interval is:",
+    options: [
+      "Close enough so no one will cut in front of you.",
+      "Spacing your vehicle at least 2 seconds behind the vehicle ahead.",
+      "100 feet.",
+      "75 feet."
+    ],
+    answer: 1,
+    explain: "Use the two-second rule: pick a fixed marker the car ahead passes, count 'one thousand one, one thousand two' — you should reach the marker no sooner."
+  },
+  {
+    id: 90,
+    cat: "Lane Use",
+    q: "On a four-lane divided highway, two vehicles are driving side-by-side ahead of you and you're in a hurry. You should:",
+    options: [
+      "Drive closely behind the vehicle in the left lane and flash your headlights.",
+      "Drive closely behind the vehicle in the right lane.",
+      "Drive in either lane with at least a two-second interval behind the vehicle ahead.",
+      "Drive closely behind the vehicles ahead changing lanes frequently."
+    ],
+    answer: 2,
+    explain: "Stay calm, keep two seconds, and drive in either lane. Tailgating and lane-hopping create danger without saving time."
+  },
+  {
+    id: 91,
+    cat: "Vehicle Condition",
+    q: "Your physical and mental condition as a driver:",
+    options: [
+      "Are not important.",
+      "Are very important safety factors when driving.",
+      "Have no effect on your driving ability.",
+      "Both 1 and 3 above."
+    ],
+    answer: 1,
+    explain: "Fatigue, stress, illness, and emotion all impair driving — sometimes as much as alcohol. Don't drive when impaired in any form."
+  },
+  {
+    id: 92,
+    cat: "Vehicle Condition",
+    q: "You notice a vehicle defect that may affect safe operation. You should:",
+    options: [
+      "Correct the defect as soon as possible.",
+      "Correct the defect when you can afford it.",
+      "Drive the vehicle slower.",
+      "Not carry passengers until corrected."
+    ],
+    answer: 0,
+    explain: "Safety defects must be corrected as soon as possible. Don't postpone repairs that affect safety."
+  },
+  {
+    id: 93,
+    cat: "Vehicle Condition",
+    q: "You borrow a friend's vehicle you've never driven before. You should:",
+    options: [
+      "Drive away — all vehicles are similar.",
+      "Don't show your friend you're unfamiliar with it.",
+      "Disregard any obvious defects so as not to embarrass your friend.",
+      "Take a few minutes to familiarize yourself with the vehicle's controls and equipment."
+    ],
+    answer: 3,
+    explain: "Find the turn signals, headlights, brakes, gear selector, hazard flashers, and horn before driving any unfamiliar vehicle."
+  },
+  {
+    id: 94,
+    cat: "Vehicle Condition",
+    q: "When driving to an unfamiliar area, you:",
+    options: [
+      "Can depend on road signs to find your way.",
+      "Should plan your trip.",
+      "Only have to know generally where your destination is.",
+      "Should always choose the most direct route."
+    ],
+    answer: 1,
+    explain: "Plan your route in advance. Consider weather, traffic, light conditions, and choose appropriate roads."
+  },
+  {
+    id: 95,
+    cat: "Safety Belts",
+    q: "Safety belts are life belts. They:",
+    options: [
+      "Must be worn at all times when driving or riding in a vehicle.",
+      "Should be worn only when driving at higher speeds.",
+      "Should be worn loosely.",
+      "Need to be worn only if riding in the front seat."
+    ],
+    answer: 0,
+    explain: "Hawaii law requires seat belts at all times for driver and all passengers. They cut your risk of death by half."
+  },
+  {
+    id: 96,
+    cat: "Safety Belts",
+    q: "The seat belt should be adjusted so that it:",
+    options: [
+      "Is loose.",
+      "Is buckled snugly across your hip bones and lower abdomen.",
+      "Is hidden beneath the seat.",
+      "Keeps the seat belt buzzer or light from operating."
+    ],
+    answer: 1,
+    explain: "Lap belt should fit snugly across your hip bones, not your stomach. The shoulder belt should leave room for a fist between belt and chest."
+  },
+  {
+    id: 97,
+    cat: "Safety Belts",
+    q: "Small children when riding in a vehicle:",
+    options: [
+      "May be safely held by a strong adult.",
+      "Will be safe if standing on the floor in the front or back.",
+      "Will not be hurt in a crash because they are small.",
+      "Must never be allowed to ride standing on a seat."
+    ],
+    answer: 3,
+    explain: "Never let a child stand or be held in a vehicle. Use approved child safety seats. No adult can hold a child during a crash."
+  },
+  {
+    id: 98,
+    cat: "Backing",
+    q: "You're late to work and in a hurry. Before you back into the street:",
+    options: [
+      "Honk your horn.",
+      "Check for children and other objects around your car.",
+      "Always race your engine so pets get out of the way.",
+      "Check for traffic before getting in the vehicle."
+    ],
+    answer: 1,
+    explain: "Walk around the car to check for children, pets, toys, and obstructions. Backing visibility is severely limited."
+  },
+  {
+    id: 99,
+    cat: "Driveway",
+    q: "You're driving forward out of your driveway:",
+    options: [
+      "You must come to a complete stop before crossing the sidewalk area.",
+      "You must slow down before crossing the sidewalk area.",
+      "You have right-of-way over pedestrians on a sidewalk area.",
+      "If you honk, you can cross the sidewalk without stopping."
+    ],
+    answer: 0,
+    explain: "Hawaii law requires a complete stop before crossing any sidewalk when leaving a driveway. Yield to all pedestrians."
+  },
+  {
+    id: 100,
+    cat: "Lane Changing",
+    q: "On a multi-lane highway you signal lane change intentions:",
+    options: [
+      "Immediately before changing lanes.",
+      "Only when actually changing lanes.",
+      "At least 50 feet before beginning to change lanes.",
+      "At least 100 feet before beginning to change lanes."
+    ],
+    answer: 3,
+    explain: "Hawaii requires signals at least 100 feet (about five car lengths) before turning, changing lanes, or stopping."
+  },
+  {
+    id: 101,
+    cat: "Lane Changing",
+    q: "Before changing lanes on a four-lane highway you must:",
+    options: [
+      "Signal your intentions for at least 100 feet.",
+      "Make sure your blind spot is clear.",
+      "Make sure there is sufficient room in traffic (never violate other traffic's two-second interval).",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All of the above. Signal early, check blind spots, and never cut into a gap that's smaller than another driver's safe following distance."
+  },
+
+  // ===== WEATHER & EMERGENCIES =====
+  {
+    id: 102,
+    cat: "Weather",
+    q: "You're driving and it begins to rain. You should:",
+    options: [
+      "Drive faster than other traffic.",
+      "Drive at least the speed limit.",
+      "Slow down and allow for weather conditions.",
+      "Drive close behind the vehicle ahead."
+    ],
+    answer: 2,
+    explain: "Rain reduces traction and visibility. Slow down, increase following distance, and turn on your low-beam headlights."
+  },
+  {
+    id: 103,
+    cat: "Weather",
+    q: "When driving along sharp curves and steep hills of mountain roads you should:",
+    options: [
+      "Always allow an approaching vehicle at least one half of the paved surface.",
+      "Use a lower gear to control speed when going down long steep hills.",
+      "Stay close to the right edge of the road.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All of the above. Mountain roads require sharing pavement, gear-down on descents, and staying right on blind curves."
+  },
+  {
+    id: 104,
+    cat: "Weather",
+    q: "Hydroplaning occurs when tires 'ride up' on water during heavy rains. To prevent it:",
+    options: [
+      "Insure tires have good tread depth.",
+      "Insure tires are inflated to proper pressure.",
+      "Reduce vehicle speed when driving in the rain.",
+      "All of the above are correct."
+    ],
+    answer: 3,
+    explain: "All three help prevent hydroplaning. Speed is the biggest factor — slow down in rain."
+  },
+  {
+    id: 105,
+    cat: "Emergencies",
+    q: "You're driving and have a blowout. You should:",
+    options: [
+      "Slam on your brakes.",
+      "Hold your steering wheel tight, and steer to stop on the shoulder.",
+      "Keep going.",
+      "Turn on your emergency flashers."
+    ],
+    answer: 1,
+    explain: "Grip the wheel firmly, ease off the gas, don't slam the brakes. Slow gradually and pull off the road."
+  },
+  {
+    id: 106,
+    cat: "Emergencies",
+    q: "While driving your wheels slip off the road edge. You should:",
+    options: [
+      "Jerk the steering wheel to force the vehicle back onto the pavement.",
+      "Speed up and steer back onto the pavement gradually.",
+      "Slam on your brakes and stop.",
+      "Slow down using brakes gently; when at a safe speed, turn the steering wheel to return to the pavement."
+    ],
+    answer: 3,
+    explain: "Don't jerk the wheel. Slow down gently, then ease back onto the pavement. A jerk can cause loss of control or rollover."
+  },
+  {
+    id: 107,
+    cat: "Emergencies",
+    q: "Your vehicle's accelerator sticks open. You should:",
+    options: [
+      "Blow your horn.",
+      "Slam on your brakes.",
+      "Turn on your hazard warning lamps.",
+      "Turn off your ignition, taking care not to engage the steering wheel locking mechanism."
+    ],
+    answer: 3,
+    explain: "Shift to neutral if possible, then turn the ignition to OFF (not LOCK — that locks the steering wheel). Coast to safety."
+  },
+  {
+    id: 108,
+    cat: "Emergencies",
+    q: "Your power steering suddenly fails. You should:",
+    options: [
+      "Honk the horn and turn off the ignition.",
+      "Turn on hazard warning lights and brace yourself.",
+      "Work hard to steer, reduce speed, drive to a safe area and stop.",
+      "Slam on your brakes."
+    ],
+    answer: 2,
+    explain: "Steering still works without power assist — it just takes more effort. Slow down, steer firmly, and pull off safely."
+  },
+  {
+    id: 109,
+    cat: "Night Driving",
+    q: "You're driving at night and another vehicle is approaching. Your headlamps:",
+    options: [
+      "Should be on high beam.",
+      "Should be on low beam.",
+      "Should be off; use your parking lights.",
+      "May be on either high or low beam."
+    ],
+    answer: 1,
+    explain: "Switch to low beams within 500 feet of an oncoming vehicle or 200 feet behind one. Never blind other drivers."
+  },
+
+  // ===== FREEWAY DRIVING =====
+  {
+    id: 110,
+    cat: "Freeways",
+    q: "You're driving on a freeway entry on-ramp. You should:",
+    options: [
+      "Drive to the end of the ramp, stop, check for oncoming traffic, signal and enter.",
+      "Stop, check for vehicles, speed up on the ramp, signal and enter.",
+      "Check for vehicles in the near lane, adjust speed for approaching vehicles, signal and enter the near lane.",
+      "Always stop before entering the freeway."
+    ],
+    answer: 2,
+    explain: "On a freeway on-ramp, accelerate to traffic speed, find a gap, signal, and merge. Stopping on a ramp is dangerous."
+  },
+  {
+    id: 111,
+    cat: "Freeways",
+    q: "You miss your freeway exit ramp. You should:",
+    options: [
+      "Back up on the shoulder to get into your exit ramp.",
+      "Turn around on the shoulder and drive on the shoulder to your exit.",
+      "Cut across the grass to your exit.",
+      "Continue driving to the next exit."
+    ],
+    answer: 3,
+    explain: "Always continue to the next exit. Backing up, U-turns across medians, or shoulder driving on a freeway is illegal and extremely dangerous."
+  },
+  {
+    id: 112,
+    cat: "Freeways",
+    q: "An exit speed shown on a ramp sign is the speed at which you should:",
+    options: [
+      "Slow to before leaving the freeway.",
+      "Slow to while on the freeway exit ramp.",
+      "Never go slower than this speed.",
+      "Never go faster than this speed anywhere on the exit ramp."
+    ],
+    answer: 1,
+    explain: "The exit speed is the maximum safe speed on the ramp itself. Slow to that speed once you're on the ramp, not before exiting."
+  },
+
+  // ===== TRUCKS, BUSES, MOTORCYCLES =====
+  {
+    id: 113,
+    cat: "Trucks",
+    q: "When driving you should give heavy trucks and buses extra room because:",
+    options: [
+      "Trucks can stop in a shorter distance than cars.",
+      "Trucks require more room to maneuver than cars.",
+      "Trucks require a greater distance to stop than cars.",
+      "Both 2 and 3 above."
+    ],
+    answer: 3,
+    explain: "Trucks need more room to maneuver and a much longer distance to stop. Give them space."
+  },
+  {
+    id: 114,
+    cat: "Trucks",
+    q: "When driving directly behind a heavy truck or bus, extra caution is needed because:",
+    options: [
+      "The truck or bus driver may not be able to see you.",
+      "Your forward visibility is blocked by the truck or bus.",
+      "Both 1 and 2 above.",
+      "None of the above."
+    ],
+    answer: 2,
+    explain: "Trucks have huge blind spots (called 'No Zones'). If you can't see the driver's mirrors, the driver can't see you."
+  },
+  {
+    id: 115,
+    cat: "Motorcycles",
+    q: "When passing a motorcycle you must:",
+    options: [
+      "Give the motorcyclist the right hand part of his traffic lane.",
+      "Give the motorcyclist his entire traffic lane as if his vehicle were a car.",
+      "Pull to the left just far enough to miss the motorcyclist.",
+      "Not let the motorcyclist know you are going to pass."
+    ],
+    answer: 1,
+    explain: "Treat a motorcycle's lane like a car's lane. Pass with full clearance — never share a lane with a motorcycle."
+  },
+
+  // ===== PEDESTRIANS & BICYCLES =====
+  {
+    id: 116,
+    cat: "Pedestrians",
+    q: "A pedestrian starts to cross in front of your vehicle. You should:",
+    options: [
+      "Honk your horn.",
+      "Slow down.",
+      "Speed up and pass in front of the pedestrian.",
+      "Stop and let the pedestrian cross."
+    ],
+    answer: 3,
+    explain: "Pedestrians always have priority. Stop and let them cross safely."
+  },
+  {
+    id: 117,
+    cat: "Pedestrians",
+    q: "You see a vehicle stopped in front of a crosswalk on a multi-lane street. You should:",
+    options: [
+      "Pass the vehicle on the right.",
+      "Pass the vehicle on the left.",
+      "Not pass the vehicle.",
+      "Blow your horn before passing."
+    ],
+    answer: 2,
+    explain: "Never pass a vehicle stopped at a crosswalk — it may be stopped for a pedestrian you can't see. This is a Hawaii law."
+  },
+  {
+    id: 118,
+    cat: "Pedestrians",
+    q: "You see a pedestrian with a white cane or guide dog on the roadway. You should know:",
+    options: [
+      "The white cane identifies a pedestrian who is blind or visually impaired.",
+      "The guide dog identifies a pedestrian who is blind, visually impaired, or has special needs.",
+      "You must stop for all pedestrians, including those who are blind or visually impaired.",
+      "All of the above are correct."
+    ],
+    answer: 3,
+    explain: "All of these. The white cane and guide dog both indicate a pedestrian who needs full priority — stop for them regardless of signal."
+  },
+  {
+    id: 119,
+    cat: "Bicycles",
+    q: "As a driver you should give a bicyclist:",
+    options: [
+      "The same rights and privileges as motorists.",
+      "Twice as much room as you think they need.",
+      "The right of way when crossing bike lanes.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "Bicyclists are legal vehicle operators. Yield to them in bike lanes, give them lots of room (at least 3 feet), and treat them as you would any vehicle."
+  },
+  {
+    id: 120,
+    cat: "Bicycles",
+    q: "Bicyclists are required to:",
+    options: [
+      "Obey traffic signs, signals, and other laws except those that by their nature cannot apply.",
+      "Ride on the sidewalk in business districts.",
+      "Ride in the center of traffic lanes.",
+      "All of the above."
+    ],
+    answer: 0,
+    explain: "Bicyclists must obey traffic laws. They are NOT allowed on sidewalks in business districts and must ride near the right edge except in specific situations."
+  },
+
+  // ===== CRASH PROCEDURES =====
+  {
+    id: 121,
+    cat: "Crashes",
+    q: "You're involved in an accident. You should:",
+    options: [
+      "Stop immediately.",
+      "Help the injured.",
+      "Call the police.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "Always stop, render aid, and call the police. Leaving the scene is a crime, even in a minor crash."
+  },
+  {
+    id: 122,
+    cat: "Crashes",
+    q: "You're in a crash and your vehicle is blocking traffic. You should:",
+    options: [
+      "If possible move your vehicle off the travelled portion of the roadway.",
+      "Not move your vehicle under any circumstances.",
+      "Wait until the police arrive before you move your vehicle.",
+      "None of the above."
+    ],
+    answer: 0,
+    explain: "If safe and possible, move the vehicle off the road to prevent secondary crashes. Take photos first if you can."
+  },
+  {
+    id: 123,
+    cat: "Crashes",
+    q: "You're in a crash and another person is injured. You should:",
+    options: [
+      "Move the injured away from the scene immediately.",
+      "Always leave the injured where they are.",
+      "Do not move the injured unnecessarily; keep them warm and administer first aid.",
+      "Stay away from the injured."
+    ],
+    answer: 2,
+    explain: "Don't move injured persons unless absolutely necessary (fire, traffic). Moving someone with a spinal injury can paralyze them."
+  },
+  {
+    id: 124,
+    cat: "Crashes",
+    q: "You strike an unattended parked vehicle and can't locate the owner. You:",
+    options: [
+      "Have done as much as you can.",
+      "Must stay until the police arrive.",
+      "Must leave a written notice with your name, address, and circumstances of the crash.",
+      "May go on your way."
+    ],
+    answer: 2,
+    explain: "Hawaii law requires you to leave a written notice with your contact information attached to the damaged vehicle. Driving away is a hit-and-run."
+  },
+
+  // ===== DISTRACTED DRIVING & MISC =====
+  {
+    id: 125,
+    cat: "Distracted",
+    q: "Hawaii law prohibits leaving a child unattended in a motor vehicle:",
+    options: [
+      "By you or any adult passenger of the motor vehicle.",
+      "For five minutes or longer.",
+      "If the child is under the age of nine.",
+      "All of the above."
+    ],
+    answer: 3,
+    explain: "All of the above. Hawaii prohibits leaving any child under 9 alone in a vehicle for 5+ minutes — by anyone."
+  },
+  {
+    id: 126,
+    cat: "Distracted",
+    q: "The safest precaution regarding phones and hand-held devices while driving is:",
+    options: [
+      "Use hands-free devices to keep both hands on the wheel — unless you are under 18.",
+      "Keep your cell phone within easy reach.",
+      "Check the number before answering.",
+      "None of the above."
+    ],
+    answer: 0,
+    explain: "Use hands-free only. Drivers under 18 are prohibited from using ANY mobile electronic device while driving in Hawaii."
+  },
+  {
+    id: 127,
+    cat: "Accessibility",
+    q: "Who may park in an accessible parking space?",
+    options: [
+      "Any vehicle transporting a disabled person.",
+      "Any vehicle that displays a disabled parking placard.",
+      "Any vehicle that displays a disabled parking placard issued to the disabled person being transported.",
+      "Any vehicle if there is no regular parking space available."
+    ],
+    answer: 2,
+    explain: "Only a vehicle displaying a placard or plate AND transporting the person to whom it was issued. Misuse of a disabled placard is a serious violation."
+  },
+  {
+    id: 128,
+    cat: "Accessibility",
+    q: "What is the purpose of the access aisle next to an accessible parking space?",
+    options: [
+      "To allow parking for emergency vehicles.",
+      "To allow deployment of a wheelchair lift/ramp and other mobility devices.",
+      "To allow parking for motorcycles, mopeds, and bicycles.",
+      "To allow vehicles to park temporarily while waiting for a passenger."
+    ],
+    answer: 1,
+    explain: "The access aisle must remain clear so a person can deploy a wheelchair ramp/lift. Never park there — even briefly."
+  },
+  {
+    id: 129,
+    cat: "Hand Signals",
+    q: "A driver extending their LEFT arm and hand straight OUT the driver's window is signaling:",
+    options: ["Stop.", "Turn left.", "Turn right.", "Slow down."],
+    answer: 1,
+    explain: "Left arm straight out = LEFT TURN. (Up = right turn. Down = stop/slow.) Use hand signals if your turn signals fail."
+  },
+  {
+    id: 130,
+    cat: "Hand Signals",
+    q: "A driver extending their LEFT arm OUT and bent UPWARD at the elbow is signaling:",
+    options: ["Stop.", "Turn left.", "Turn right.", "Slow down."],
+    answer: 2,
+    explain: "Left arm out and up = RIGHT turn. (Out = left. Down = stop/slow.)"
+  },
+  {
+    id: 131,
+    cat: "Hand Signals",
+    q: "A driver extending their LEFT arm OUT and bent DOWNWARD is signaling:",
+    options: ["Stop or slow.", "Turn left.", "Turn right.", "Speed up."],
+    answer: 0,
+    explain: "Left arm out and down = STOP or SLOW DOWN."
+  },
+
+  // ===== SIGN IDENTIFICATION (visual style — described in text) =====
+  {
+    id: 132,
+    cat: "Sign ID",
+    q: "An eight-sided red sign with white letters is:",
+    options: ["A yield sign.", "A stop sign.", "A do not enter sign.", "A railroad crossing sign."],
+    answer: 1,
+    explain: "Octagon = STOP. The 8-sided red sign is the only sign of its shape, so you can recognize it from any angle."
+  },
+  {
+    id: 133,
+    cat: "Sign ID",
+    q: "A triangular red and white sign means:",
+    options: ["Stop.", "Yield — slow down and prepare to stop if necessary.", "Caution.", "Construction ahead."],
+    answer: 1,
+    explain: "An inverted red-and-white triangle is a YIELD sign. Slow down, give right-of-way, stop only if necessary."
+  },
+  {
+    id: 134,
+    cat: "Sign ID",
+    q: "A round red sign with a white horizontal bar (DO NOT ENTER) means:",
+    options: [
+      "Pull off the road and turn around — you're heading the wrong way.",
+      "Drive carefully through.",
+      "Continue to the next exit and turn around.",
+      "Stop and check for traffic."
+    ],
+    answer: 0,
+    explain: "DO NOT ENTER is placed at one-way street and ramp entrances to prevent wrong-way driving. Pull off and reverse direction safely."
+  },
+  {
+    id: 135,
+    cat: "Sign ID",
+    q: "A diamond-shaped yellow sign with a truck on a downhill slope means:",
+    options: [
+      "Slow down and look for trucks.",
+      "Slow down and check your brakes — steep hill ahead.",
+      "Truck route ahead.",
+      "Trucks have right of way."
+    ],
+    answer: 1,
+    explain: "This is a steep hill warning. Downshift, check brakes, and reduce speed."
+  },
+  {
+    id: 136,
+    cat: "Sign ID",
+    q: "A diamond-shaped yellow sign showing a car with wavy lines behind it means:",
+    options: [
+      "Curves ahead.",
+      "Slippery when wet.",
+      "Construction ahead.",
+      "Watch for animals."
+    ],
+    answer: 1,
+    explain: "This warns the road is slippery when wet. Reduce speed in rain — and watch for hydroplaning."
+  },
+  {
+    id: 137,
+    cat: "Sign ID",
+    q: "A pennant-shaped yellow sign on the left side of the road that reads NO PASSING ZONE means:",
+    options: [
+      "You may pass with caution.",
+      "It marks the START of a no-passing zone — complete any pass before reaching it.",
+      "It marks the END of a no-passing zone.",
+      "Slow down for construction."
+    ],
+    answer: 1,
+    explain: "Pennant on the left = beginning of a no-passing zone. If you're already passing, finish before this sign — don't start a pass at it."
+  },
+  {
+    id: 138,
+    cat: "Sign ID",
+    q: "An orange triangle with a red border on the back of a vehicle ahead means:",
+    options: [
+      "Hazardous cargo.",
+      "A slow-moving vehicle (25 mph or less).",
+      "Yield to that vehicle.",
+      "Tow truck."
+    ],
+    answer: 1,
+    explain: "The orange-and-red triangle is the slow-moving vehicle emblem. Approach with caution and pass when safe."
+  },
+  {
+    id: 139,
+    cat: "Sign ID",
+    q: "A yellow diamond sign with two children figures crossing means:",
+    options: [
+      "School zone — slow down and watch for children.",
+      "Pedestrian crossing.",
+      "No children allowed.",
+      "Library ahead."
+    ],
+    answer: 0,
+    explain: "School crossing or school zone. Reduce speed, be ready to stop, watch for kids — they may dart out."
+  },
+  {
+    id: 140,
+    cat: "Sign ID",
+    q: "A yellow diamond sign showing a traffic signal symbol means:",
+    options: [
+      "Look for a railroad crossing.",
+      "Look for a traffic light ahead and adjust speed.",
+      "Stop sign ahead.",
+      "Lane closure."
+    ],
+    answer: 1,
+    explain: "Traffic signal warning sign. A signal is ahead — slow down and prepare to stop if necessary."
+  },
+  {
+    id: 141,
+    cat: "Sign ID",
+    q: "A red circle with a red diagonal line through a right-turn arrow means:",
+    options: ["Right turn permitted.", "No right turn.", "Stop before turning right.", "Sharp curve ahead."],
+    answer: 1,
+    explain: "The red circle with a diagonal line means PROHIBITED. The arrow shows what's prohibited — in this case, a right turn."
+  },
+
+  // ===== SCENARIOS / GENERAL DRIVING =====
+  {
+    id: 142,
+    cat: "Scenarios",
+    q: "You want to enter the driving lane from a parked position. You should:",
+    options: [
+      "Yield to the cars in the driving lane.",
+      "Sound your horn before entering.",
+      "Signal a left turn and enter rapidly.",
+      "Pull out quickly."
+    ],
+    answer: 0,
+    explain: "Always yield to traffic when leaving a parking spot. Signal, check blind spots, and merge when there's a safe gap."
+  },
+  {
+    id: 143,
+    cat: "Scenarios",
+    q: "You plan to enter traffic ahead. You should stop ONLY if:",
+    options: [
+      "Visibility is poor.",
+      "Traffic is moving too fast.",
+      "There is no opening in traffic.",
+      "There are no cars following you."
+    ],
+    answer: 2,
+    explain: "Stop only if there's no gap to safely enter. Stopping unnecessarily creates rear-end risk."
+  },
+  {
+    id: 144,
+    cat: "Scenarios",
+    q: "You see pedestrians in a crosswalk and there's no stop sign. You should:",
+    options: [
+      "Slow and inch your way through.",
+      "Stop and let the pedestrians cross.",
+      "Go ahead and let the pedestrians wait.",
+      "Stop and then go ahead into the crosswalk."
+    ],
+    answer: 1,
+    explain: "Stop completely and let pedestrians cross. Hawaii law gives them right of way in any marked or unmarked crosswalk."
+  },
+  {
+    id: 145,
+    cat: "Scenarios",
+    q: "Other driver's headlights are blinding you at night. You should:",
+    options: [
+      "Flick your lights up and down until they dim.",
+      "Turn on your bright lights to teach them a lesson.",
+      "Turn your lights on and off.",
+      "Look toward the right edge of the road."
+    ],
+    answer: 3,
+    explain: "Look at the right edge of the road — keep your peripheral vision on the oncoming vehicle. Don't look directly into the lights."
+  },
+  {
+    id: 146,
+    cat: "Scenarios",
+    q: "The truck beside you stops suddenly. You should:",
+    options: [
+      "Slow down and be ready to stop quickly.",
+      "Maintain present speed but be ready to stop.",
+      "Stop where you are and then go ahead.",
+      "Sound your horn, then pass."
+    ],
+    answer: 0,
+    explain: "Slow down and be prepared to stop. Trucks often stop for hazards you can't see. Pass with caution if safe."
+  },
+  {
+    id: 147,
+    cat: "Scenarios",
+    q: "The light just turned from green to yellow and the car ahead is going on. You should:",
+    options: [
+      "Stop at the corner.",
+      "Slow and proceed with caution.",
+      "Continue through the intersection.",
+      "Speed up to clear the intersection."
+    ],
+    answer: 0,
+    explain: "Yellow means red is coming. Stop at the corner if you can do so safely. Don't follow the car ahead through a stale yellow."
+  },
+  {
+    id: 148,
+    cat: "Scenarios",
+    q: "The car ahead is signaling for a left turn. You should:",
+    options: [
+      "Slow down and signal for a left turn.",
+      "Stop and signal for a left turn.",
+      "Slow down and prepare to stop.",
+      "Pass on the right."
+    ],
+    answer: 2,
+    explain: "Slow down and prepare to stop while the turning vehicle clears. Don't pass on the right unless there's a designated lane."
+  },
+  {
+    id: 149,
+    cat: "Scenarios",
+    q: "A driver is cutting in right in front of you. You should:",
+    options: [
+      "Maintain your speed.",
+      "Brake hard to slow quickly.",
+      "Brake gently to slow slightly and create more distance.",
+      "Brake hard and steer to the right."
+    ],
+    answer: 2,
+    explain: "Gently brake to give yourself more distance. Hard braking risks getting rear-ended; sudden steering can cause loss of control."
+  },
+  {
+    id: 150,
+    cat: "Scenarios",
+    q: "You're driving the speed limit and the driver behind is following too close. You should:",
+    options: [
+      "Slow slightly and flash your brake lights.",
+      "Brake and slow rapidly.",
+      "Speed up to increase distance.",
+      "Wave to show it's safe to pass."
+    ],
+    answer: 0,
+    explain: "Slow slightly and tap brakes to encourage them to back off or pass. Don't speed up to escape — they'll just keep tailgating."
+  },
+  {
+    id: 151,
+    cat: "Scenarios",
+    q: "You're walking along a highway. You should:",
+    options: [
+      "Walk 2 or 3 feet from the edge of the road.",
+      "Wear dark colored clothing.",
+      "Walk in the same direction as traffic.",
+      "Walk facing oncoming traffic."
+    ],
+    answer: 3,
+    explain: "Always walk facing oncoming traffic. Wear bright clothing and stay well off the roadway."
+  },
+  {
+    id: 152,
+    cat: "Scenarios",
+    q: "You're skidding (the rear end is sliding). You should:",
+    options: [
+      "Pump the brakes.",
+      "Turn the steering wheel in the same direction the rear of the car is sliding.",
+      "Turn the wheels away from the direction of the skid.",
+      "Steer straight ahead and brake hard."
+    ],
+    answer: 1,
+    explain: "Steer in the direction the rear is sliding — this is sometimes called 'steering into the skid.' Don't slam the brakes."
+  },
+  {
+    id: 153,
+    cat: "Scenarios",
+    q: "You're parking on a downhill grade next to a curb. Which way should you turn your wheels?",
+    options: [
+      "In any direction.",
+      "Toward the curb.",
+      "Straight ahead.",
+      "Away from the curb."
+    ],
+    answer: 1,
+    explain: "Downhill: turn wheels TOWARD the curb. If your car rolls, the curb will catch it. (Uphill with curb: turn AWAY. No curb: turn toward the road edge.)"
+  },
+  {
+    id: 154,
+    cat: "Scenarios",
+    q: "You see children playing near the street ahead. You should:",
+    options: [
+      "Honk your horn.",
+      "Drive to the left side of the street.",
+      "Slow down and prepare to stop.",
+      "Drive close to the right curb."
+    ],
+    answer: 2,
+    explain: "Children are unpredictable. Slow down and be ready to stop — they can dart into the street without warning."
+  },
+  {
+    id: 155,
+    cat: "Scenarios",
+    q: "A car is on a ramp about to enter the freeway ahead of you. You should:",
+    options: [
+      "Sound your horn to warn them.",
+      "Move left if the way is clear.",
+      "Slow down quickly.",
+      "Speed up to get past safely."
+    ],
+    answer: 1,
+    explain: "Help merging traffic by moving over a lane if it's clear. This is courteous and safer than sudden speed changes."
+  },
+  {
+    id: 156,
+    cat: "Scenarios",
+    q: "You see flashing red lights at a railroad crossing. You should:",
+    options: [
+      "Stop and wait for the lights to stop flashing.",
+      "Stop, then go if the way is safe.",
+      "Slow, and stop only if a train is near.",
+      "Stop, and drive quickly across the tracks."
+    ],
+    answer: 0,
+    explain: "Flashing red at a railroad crossing means a train is coming. Wait until the lights stop flashing and gates rise before crossing."
+  },
+  {
+    id: 157,
+    cat: "Scenarios",
+    q: "You're stopped at a green light but traffic ahead is stopped. You should:",
+    options: [
+      "Drive into the intersection as far as you can.",
+      "Wait until there's space for your entire vehicle on the opposite side of the intersection before proceeding.",
+      "Honk your horn.",
+      "Drive partway into the intersection."
+    ],
+    answer: 1,
+    explain: "Never enter an intersection unless you can clear it. Blocking an intersection ('gridlocking') is illegal and dangerous."
+  },
+  {
+    id: 158,
+    cat: "Scenarios",
+    q: "You see a school zone sign. You should:",
+    options: [
+      "Slow down and look for school children.",
+      "Stop at the next crosswalk.",
+      "Maintain speed unless you see a child.",
+      "Honk to warn children."
+    ],
+    answer: 0,
+    explain: "Slow to the school zone speed limit and watch for children. Never honk at kids — it can startle them into the street."
+  },
+  {
+    id: 159,
+    cat: "Scenarios",
+    q: "You're approaching a stopped school bus with flashing red lights. You should:",
+    options: [
+      "Stop when approaching from either the front or rear.",
+      "Slow when approaching from front or rear.",
+      "Stop only when approaching from the front.",
+      "Stop only when approaching from the rear."
+    ],
+    answer: 0,
+    explain: "On undivided roads, stop in BOTH directions when red lights flash. Stay stopped until the lights stop flashing. Penalty up to $1,000 in Hawaii."
+  },
+  {
+    id: 160,
+    cat: "Scenarios",
+    q: "You see a flashing red traffic light at an intersection (not a railroad crossing). You should:",
+    options: [
+      "Go with caution.",
+      "Stop and then go when safe — same as a stop sign.",
+      "Slow to less than 10 mph and go.",
+      "Turn right or left, do not go straight."
+    ],
+    answer: 1,
+    explain: "Flashing red at an intersection = stop sign. Come to a complete stop, then proceed when safe."
+  }
+];
+
+// ============================================================================
+// APP STATE & LOGIC
+// ============================================================================
+let state = {
+  mode: null,
+  questions: [],
+  currentIdx: 0,
+  answers: [],
+  reviewMode: false
+};
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startMode(mode) {
+  state.mode = mode;
+  state.currentIdx = 0;
+  state.answers = [];
+  state.reviewMode = false;
+
+  if (mode === 'exam') {
+    state.questions = shuffle(QUESTIONS).slice(0, 30);
+  } else if (mode === 'study') {
+    state.questions = shuffle(QUESTIONS).slice(0, 20);
+  } else if (mode === 'signs') {
+    state.questions = shuffle(QUESTIONS.filter(q =>
+      q.cat === 'Signs' || q.cat === 'Sign ID' || q.cat === 'Signals' || q.cat === 'Markings' || q.cat === 'Hand Signals'
+    ));
+  } else if (mode === 'all') {
+    state.questions = shuffle(QUESTIONS);
+  }
+
+  showScreen('exam');
+  renderQuestion();
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function renderQuestion() {
+  const q = state.questions[state.currentIdx];
+  const total = state.questions.length;
+  const isStudy = state.mode === 'study';
+  const banner = document.getElementById('modeBanner');
+
+  if (isStudy) {
+    banner.style.display = 'flex';
+    banner.innerHTML = '<span style="font-size:14px;">📚</span> Study mode — instant feedback after each answer';
+  } else if (state.mode === 'signs') {
+    banner.style.display = 'flex';
+    banner.innerHTML = '<span style="font-size:14px;">🔺</span> Signs &amp; Signals drill';
+  } else if (state.mode === 'all') {
+    banner.style.display = 'flex';
+    banner.innerHTML = '<span style="font-size:14px;">📖</span> All questions — full review';
+  } else {
+    banner.style.display = 'none';
+  }
+
+  document.getElementById('qCurrent').textContent = state.currentIdx + 1;
+  document.getElementById('qTotal').textContent = total;
+  document.getElementById('progressFill').style.width = `${((state.currentIdx) / total) * 100}%`;
+
+  const card = document.getElementById('questionCard');
+  card.innerHTML = `
+    <div class="q-meta">
+      <span class="q-num">QUESTION ${state.currentIdx + 1}</span>
+      <span class="q-tag">${q.cat}</span>
+    </div>
+    <h2 class="q-text">${q.q}</h2>
+    <div class="options" id="optionsList">
+      ${q.options.map((opt, i) => `
+        <button class="option" data-idx="${i}" onclick="selectOption(${i})">
+          <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+          <span class="option-text">${opt}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div id="explainBox"></div>
+  `;
+
+  renderNav();
+}
+
+function selectOption(idx) {
+  const q = state.questions[state.currentIdx];
+  const isStudy = state.mode === 'study';
+  const isLastAnswered = state.answers[state.currentIdx] !== undefined;
+
+  // In study mode, after answer is locked in, do nothing
+  if (isStudy && isLastAnswered) return;
+
+  // In study mode: lock answer, show feedback, show next button
+  if (isStudy) {
+    state.answers[state.currentIdx] = idx;
+    showFeedback(idx);
+  } else {
+    // In exam mode: just toggle selection — can change before clicking Next
+    state.answers[state.currentIdx] = idx;
+    document.querySelectorAll('.option').forEach((el, i) => {
+      el.classList.toggle('selected', i === idx);
+    });
+  }
+
+  renderNav();
+}
+
+function showFeedback(selectedIdx) {
+  const q = state.questions[state.currentIdx];
+  const correct = q.answer;
+  const isCorrect = selectedIdx === correct;
+
+  document.querySelectorAll('.option').forEach((el, i) => {
+    el.disabled = true;
+    el.classList.remove('selected');
+    if (i === correct) el.classList.add('correct');
+    if (i === selectedIdx && !isCorrect) el.classList.add('incorrect');
+  });
+
+  const explainBox = document.getElementById('explainBox');
+  explainBox.innerHTML = `
+    <div class="explanation">
+      <div class="explanation-head">
+        <span class="explanation-badge ${isCorrect ? 'right' : 'wrong'}">
+          ${isCorrect ? '✓ Correct' : '✗ Incorrect'}
+        </span>
+      </div>
+      <div class="explanation-text">${q.explain}</div>
+    </div>
+  `;
+}
+
+function renderNav() {
+  const nav = document.getElementById('examNav');
+  const isStudy = state.mode === 'study';
+  const hasAnswered = state.answers[state.currentIdx] !== undefined;
+  const isLast = state.currentIdx === state.questions.length - 1;
+
+  let html = '';
+  if (state.currentIdx > 0) {
+    html += `<button class="btn btn-secondary" onclick="prevQuestion()">Back</button>`;
+  }
+
+  if (isStudy) {
+    if (hasAnswered) {
+      html += isLast
+        ? `<button class="btn btn-accent" onclick="finishExam()">Finish &amp; See Results</button>`
+        : `<button class="btn btn-primary" onclick="nextQuestion()">Next Question</button>`;
+    }
+  } else {
+    // exam mode — Next/Finish always shown but disabled until answered
+    html += isLast
+      ? `<button class="btn btn-accent" onclick="finishExam()" ${hasAnswered ? '' : 'disabled'}>Submit Exam</button>`
+      : `<button class="btn btn-primary" onclick="nextQuestion()" ${hasAnswered ? '' : 'disabled'}>Next</button>`;
+  }
+
+  nav.innerHTML = html;
+}
+
+function nextQuestion() {
+  if (state.answers[state.currentIdx] === undefined) return;
+  state.currentIdx++;
+  if (state.currentIdx >= state.questions.length) {
+    finishExam();
+  } else {
+    renderQuestion();
+  }
+}
+
+function prevQuestion() {
+  if (state.currentIdx === 0) return;
+  state.currentIdx--;
+  renderQuestion();
+  // restore selection visual if exam mode
+  const prevAnswer = state.answers[state.currentIdx];
+  if (prevAnswer !== undefined && state.mode !== 'study') {
+    setTimeout(() => {
+      document.querySelectorAll('.option').forEach((el, i) => {
+        if (i === prevAnswer) el.classList.add('selected');
+      });
+    }, 10);
+  } else if (prevAnswer !== undefined && state.mode === 'study') {
+    setTimeout(() => showFeedback(prevAnswer), 10);
+  }
+}
+
+function confirmQuit() {
+  if (state.answers.filter(x => x !== undefined).length > 0) {
+    if (!confirm('Your progress will be lost. Quit the exam?')) return;
+  }
+  goHome();
+}
+
+function goHome() {
+  state = { mode: null, questions: [], currentIdx: 0, answers: [], reviewMode: false };
+  showScreen('home');
+}
+
+function finishExam() {
+  // Calculate score
+  let correct = 0;
+  state.questions.forEach((q, i) => {
+    if (state.answers[i] === q.answer) correct++;
+  });
+  const total = state.questions.length;
+  const pct = Math.round((correct / total) * 100);
+  const passed = pct >= 80;
+
+  // Render results
+  document.getElementById('scoreNum').textContent = `${correct}/${total}`;
+  document.getElementById('scorePct').textContent = `${pct}%`;
+
+  const verdict = document.getElementById('verdict');
+  const detail = document.getElementById('verdictDetail');
+  if (passed) {
+    verdict.textContent = pct === 100 ? 'Perfect score! 🌺' : 'Pass — nice work!';
+    verdict.className = 'results-verdict pass';
+    detail.textContent = pct === 100
+      ? "You're more than ready for the real thing."
+      : `You'd pass the real exam (80% needed). Keep practicing the missed topics.`;
+  } else {
+    verdict.textContent = 'Not yet — keep studying';
+    verdict.className = 'results-verdict fail';
+    detail.textContent = `You need 80% to pass the real exam. Review the questions you missed and try again.`;
+  }
+
+  // Animate ring
+  const ring = document.getElementById('scoreRingFill');
+  const circumference = 2 * Math.PI * 80;
+  const offset = circumference - (pct / 100) * circumference;
+  ring.style.stroke = passed ? 'var(--palm-light)' : 'var(--hibiscus)';
+  setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+
+  // Render review list
+  const reviewItems = document.getElementById('reviewItems');
+  reviewItems.innerHTML = state.questions.map((q, i) => {
+    const userAns = state.answers[i];
+    const isRight = userAns === q.answer;
+    return `
+      <div class="review-item">
+        <div class="review-status ${isRight ? 'right' : 'wrong'}">${isRight ? '✓' : '✗'}</div>
+        <div class="review-q">
+          <span class="review-q-num">Q${i + 1}.</span> ${q.q}
+          ${!isRight ? `<div style="margin-top:6px;color:var(--ink-soft);font-size:12.5px;"><strong style="color:var(--palm)">Correct:</strong> ${q.options[q.answer]}</div>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Show/hide review mistakes button
+  const wrongCount = state.questions.length - correct;
+  const reviewBtn = document.getElementById('reviewBtn');
+  if (wrongCount === 0) {
+    reviewBtn.style.display = 'none';
+  } else {
+    reviewBtn.style.display = 'block';
+    reviewBtn.textContent = `Practice ${wrongCount} Missed Question${wrongCount > 1 ? 's' : ''}`;
+  }
+
+  showScreen('results');
+}
+
+function reviewMistakes() {
+  // Build a study-mode session from the questions the user got wrong
+  const wrongQs = state.questions.filter((q, i) => state.answers[i] !== q.answer);
+  state.questions = wrongQs;
+  state.currentIdx = 0;
+  state.answers = [];
+  state.mode = 'study';
+  showScreen('exam');
+  renderQuestion();
+}
+
+// init
+showScreen('home');
+</script>
+</body>
+</html>
